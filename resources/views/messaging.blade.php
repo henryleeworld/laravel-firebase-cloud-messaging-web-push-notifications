@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -56,13 +56,13 @@
             </div>
         </div>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js" defer></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js" defer></script>
         <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-        <!-- <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js" defer></script> -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js" defer></script> -->
         <!-- Add Firebase products that you want to use -->
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js" defer></script>
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js" defer></script>
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-messaging.js" defer></script>
-        <script src="{{ secure_asset('js/firebase/7.15.5/init-firebase.js') }}" defer></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js" defer></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-firestore.js" defer></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js" defer></script>
+        <script src="{{ secure_asset('js/firebase/7.16.0/initialization.js') }}" defer></script>
     </body>
 </html>

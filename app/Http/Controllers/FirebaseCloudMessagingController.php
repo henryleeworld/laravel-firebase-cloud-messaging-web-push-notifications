@@ -40,7 +40,7 @@ class FirebaseCloudMessagingController extends Controller
      */
     public function sendMessage()
     {
-        $token = 'exzld5iOL9Zl0UICjhBfvu:APA91bF_5CDDjHHVYBguOUW3I8d1KqFys_y7LuJZNKpr7kmtP8qA71OzIWMSNUzwt3piCHRlOaN71LK67syonQ-0x2bg9HyihOW6MFZlyic767b2wY098yUdqLpszQa4Yn1gkjcbumsG';
+        $token = 'drHczk7X72ZaI2mO1vQs1R:APA91bGyhtZZoDkRQ-7a9UY2az7xy3vjODF_1rWPL3SECKkXzkTJmvkPGwKlBDpaus6Atmnufnbi6qU4-cO24T5t3AuX_7nmpOcEnDVfG4YVRIWTiiIcyLroPBetKLLcHLdGdQbFFOpV';
 		$title = 'Henry Title';
         $body = 'Henry Body';
         $icon = secure_asset('images/messaging-icon.png');

@@ -9,17 +9,14 @@ var firebaseConfig = {
     measurementId: "G-80TEH3V91N"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registration) {
-        // Registration was successful
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
         messaging.useServiceWorker(registration);
     }).catch(function(err) {
-        // registration failed :(
         console.log('ServiceWorker registration failed: ', err);
     });
 }
@@ -29,10 +26,6 @@ requestPermission();
 
 messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
-    // [START_EXCLUDE]
-    // Update the UI to include the received message.
-    // appendMessage(payload);
-    // [END_EXCLUDE]
     if (Notification.permission === 'granted') {
         notifyMe(payload);
     }
@@ -41,19 +34,29 @@ messaging.onMessage((payload) => {
 messaging.onTokenRefresh(() => {
     messaging.getToken().then((refreshedToken) => {
         console.log('Token refreshed.');
-        // Indicate that the new Instance ID token has not yet been sent to the
-        // app server.
         setTokenSentToServer(false);
-        // Send Instance ID token to app server.
         sendTokenToServer(refreshedToken);
-        // [START_EXCLUDE]
-        // Display new Instance ID token and clear UI of all previous messages.
         resetUI();
-        // [END_EXCLUDE]
     }).catch((err) => {
         console.log('Unable to retrieve refreshed token ', err);
     });
 });
+
+function deleteToken() {
+    messaging.getToken().then((currentToken) => {
+        messaging.deleteToken(currentToken).then(() => {
+            console.log('Token deleted.');
+            setTokenSentToServer(false);
+            resetUI();
+        }).catch((err) => {
+            console.log('Unable to delete token. ', err);
+        });
+    }).catch((err) => {
+        console.log('Error retrieving Instance ID token. ', err);
+        showToken('Error retrieving Instance ID token. ', err);
+    });
+
+}
 
 function isTokenSentToServer() {
     return window.localStorage.getItem('sentToServer') === '1';
@@ -75,33 +78,22 @@ function notifyMe(payload) {
 
 function requestPermission() {
     console.log('Requesting permission...');
-    // [START request_permission]
     Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
             console.log('Notification permission granted.');
-            // TODO(developer): Retrieve an Instance ID token for use with FCM.
-            // [START_EXCLUDE]
-            // In many cases once an app has been granted notification permission,
-            // it should update its UI reflecting this.
             resetUI();
-            // [END_EXCLUDE]
         } else {
             console.log('Unable to get permission to notify.');
         }
     });
-    // [END request_permission]
 }
 
 function resetUI() {
-    // [START get_token]
-    // Get Instance ID token. Initially this makes a network call, once retrieved
-    // subsequent calls to getToken will return from cache.
     messaging.getToken().then((currentToken) => {
         if (currentToken) {
             console.log(currentToken);
             sendTokenToServer(currentToken);
         } else {
-            // Show permission request.
             console.log('No Instance ID token available. Request permission to generate one.');
             setTokenSentToServer(false);
         }
@@ -109,13 +101,11 @@ function resetUI() {
         console.log('An error occurred while retrieving token. ', err);
         setTokenSentToServer(false);
     });
-    // [END get_token]
 }
 
 function sendTokenToServer(currentToken) {
     if (!isTokenSentToServer()) {
         console.log('Sending token to server...');
-        // TODO(developer): Send the current token to your server.
         setTokenSentToServer(true);
     } else {
         console.log('Token already sent to server so won\'t send it again ' +
@@ -124,17 +114,20 @@ function sendTokenToServer(currentToken) {
 }
 
 function showWin(payload) {
-    // console.log('onMessage: ', payload);
-    var notifyMsg = payload.notification;
-    // console.log(payload);
-    var notification = new Notification(notifyMsg.title, {
-        body: notifyMsg.body,
-        icon: notifyMsg.icon
+    console.log('onMessage: ', payload.notification);
+    var notification = new Notification(payload.notification.title, {
+        body: payload.notification.body,
+        icon: payload.notification.icon
     });
     notification.onclick = function(e) {
         e.preventDefault(); // prevent the browser from focusing the Notification's tab
-        window.open(notifyMsg.click_action);
-    }
+        window.open(payload.notification.click_action);
+    };
+    /*
+    setTimeout(function() {
+        notification.close()
+    }, 5000);
+    */
 }
 
 function setTokenSentToServer(sent) {
