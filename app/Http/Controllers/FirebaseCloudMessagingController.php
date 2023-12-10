@@ -40,9 +40,9 @@ class FirebaseCloudMessagingController extends Controller
      */
     public function sendMessage()
     {
-        $token = 'drHczk7X72ZaI2mO1vQs1R:APA91bGyhtZZoDkRQ-7a9UY2az7xy3vjODF_1rWPL3SECKkXzkTJmvkPGwKlBDpaus6Atmnufnbi6qU4-cO24T5t3AuX_7nmpOcEnDVfG4YVRIWTiiIcyLroPBetKLLcHLdGdQbFFOpV';
-		$title = 'Henry Title';
-        $body = 'Henry Body';
+        $token = 'fYxzUlpFgNt5iyrwqcAzA4:APA91bE5_2ut6jttFKkC7InvB062RKwSA5xjc_wo82a_jF8ahvfMpL6ftlDJB8dnQD3wUj7hPemwOmQkbH4cR_a-v_1lBcLeCOU5UktIIifTBA0XyASiVnn4lIRD7fLFmBC7BnJ_2fyp';
+		$title = '亨利的世界標題';
+        $body = '亨利的世界內容';
         $icon = secure_asset('images/messaging-icon.png');
         $this->firebaseCloudMessagingService->sendMessageToSingleDevice($token, $title, $body, $icon);
         echo '已發送' . PHP_EOL;

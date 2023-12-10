@@ -1,6 +1,6 @@
-# Laravel 7 Firebase 雲訊息網絡應用推送通知
+# Laravel 10 Firebase 雲訊息網絡應用推送通知
 
-引入 holahalo 的 laravel-fcm 套件來擴增 Firebase 雲訊息網絡應用推送通知，推送消息提供了重新吸引用戶的簡單有效方式。
+引入 code-lts 的 laravel-fcm 套件來擴增 Firebase 雲訊息網絡應用推送通知，推送消息提供了重新吸引用戶的簡單有效方式。
 
 ## 使用方式
 - 把整個專案複製一份到你的電腦裡，這裡指的「內容」不是只有檔案，而是指所有整個專案的歷史紀錄、分支、標籤等內容都會複製一份下來。
@@ -21,5 +21,5 @@ $ php artisan key:generate
 - 你可以經由 `/send/message` 來進行推送通知。
 
 ## 畫面截圖
-![](https://i.imgur.com/UytR7lR.png)
+![](https://i.imgur.com/bjuZWux.gif)
 > 網絡應用推送通知是個選擇性功能，讓網站即使在未載入時也能傳送訊息給您。網站能使用這個功能提供您推送通知或在背景更新資料

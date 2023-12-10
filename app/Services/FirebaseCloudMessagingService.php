@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use LaravelFCM\Facades\FCM;
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
-use LaravelFCM\Facades\FCM;
 
 /**
  * Firebase cloud messaging service
